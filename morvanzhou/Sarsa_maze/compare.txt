@@ -1,0 +1,6 @@
+应该好好看看sarsa和q-learning的区别：
+
+1.Q是offline，S是online learning
+2.Q勇敢，S谨慎
+3.S在每个episode开始选择一个动作，直到循环结束，Q每次循环都选择一个动作
+4.Q每次都选Q值最大的动作，而S在一开始就“确定”了下一步该怎样走，也就是动作是确定的
