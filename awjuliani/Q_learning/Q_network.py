@@ -1,6 +1,17 @@
 # 0 Q-Network
 # Q-learning可以用tables（查找表）或者neural network（状态的规模无限大） 来实现。
 
+""" 输入网络的都是用来选择动作的，不要忘了，不管我们的网络多么的复杂，都是为了选择动作而生。
+
+输入状态state[1, 16], 输出Q值[1, 4]，取值最大的那一维，就是我们想要的动作。
+计算Q target和Q predict的最小平方误差，再用梯度下降法做更新优化。
+这一次和Q table步骤基本是一样的
+这里选择动作采用e_greedy 的策略， 并且e值随着轮数的增加减少对随机动作选择的机会。
+
+np.identity(16)[s:s+1]
+产生一个16阶单位阵， 并选择一行，也就是一个状态[1, 16]
+"""
+
 # q-network algorithm that solves the frozenlake problem
 
 from __future__ import division
