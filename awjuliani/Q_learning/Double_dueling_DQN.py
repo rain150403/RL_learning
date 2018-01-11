@@ -234,3 +234,29 @@ print("Percent of succesful episodes: " + str(sum(rList)/num_episodes) + "%")
 rMat = np.resize(np.array(rList), [len(rList)//100, 100])
 rMean = np.average(rMat, 1)
 plt.plot(rMean)
+
+"""
+每一个训练步需要多少经历（每次从experience buffer获取样本数）： batch_size
+多久执行一次训练步（每隔多少step执行一次模型参数更新）： update_freq   更新频率
+游戏训练多少轮： num_episodes
+在训练开始之前执行多少次动作选择（目的是经历experience积累）： pre_train_steps
+学习率（在更新参数的时候涉及到的学习率）： tau
+每一轮最多执行的步数，一旦超过这个数字，还没有结果，那就自动结束： max_epLength
+startE起始执行随机Action概率。
+endE最终执行随机Action概率。
+anneling_steps从初始随机概率降到最终随机概率所需步数。
+
+（这就是前面提到的，随着步数的增加，选择随机动作的概率越来越小。）
+
+
+
+
+
+mainQN,target QN这两个网络是用来干嘛的，有什么关系？
+
+没看明白是怎么训练更新，并更新参数到target网络的，
+
+在这里找double DQN, dueling DQN的痕迹。
+
+https://my.oschina.net/u/3482787/blog/1506974这个写的挺详细的。
+"""
