@@ -1,4 +1,5 @@
 # 0 Q-Network
+# Q-learning可以用tables（查找表）或者neural network（状态的规模无限大） 来实现。
 
 # q-network algorithm that solves the frozenlake problem
 
