@@ -236,6 +236,22 @@ rMean = np.average(rMat, 1)
 plt.plot(rMean)
 
 """
+Q network网络结构：
+
+#The network recieves a frame from the game, flattened into an array.
+#It then resizes it and processes it through four convolutional layers.
+获取游戏的一帧，拉平成为一个数组，再resize，然后用4个卷积层去处理，用卷积层处理，能更好的“理解”图像的信息
+
+#We take the output from the final convolutional layer and split it into separate advantage and value streams.
+经过四个卷积的处理之后，我们把结果分为advantage和value
+
+#Then combine them together to get our final Q-values.
+再把advantage和value组合在一起成为我们的最终的Q-value
+
+#Below we obtain the loss by taking the sum of squares difference between the target and prediction Q values.
+利用Q-value的目标值和预测值的最小二乘损失获得loss
+
+参数：
 每一个训练步需要多少经历（每次从experience buffer获取样本数）： batch_size
 多久执行一次训练步（每隔多少step执行一次模型参数更新）： update_freq   更新频率
 游戏训练多少轮： num_episodes
