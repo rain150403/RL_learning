@@ -5,6 +5,13 @@
 2.  gridworld
     Feel free to adjust the size of the gridworld. Making it smaller provides an easier task for our DQN agent, while making the world larger increases the challenge.你可以随意调整grid world的大小，当然越小就越简单，越大也也困难。
     The position of the three blocks is randomized every episode.还有，每一轮陷阱和目标块的位置， 还有agent的初始位置都是随机的。
+    
+部分可观测马尔科夫决策过程：
+    Initializing the Gridworld with True limits the field of view, resulting in a partially observable MDP. Initializing it with False provides the agent with the entire environment, resulting in a fully MDP.
+这个环境是可以设置的，可以设置成部分可观测，也可以整体环境都能看到。
+When the agent moves through a green or red square, it is randomly moved to a new place in the environment.
+如果agent通过了红色或者绿色块，那它就会到一个新的位置重新开始。
+
 
 3.  n_armed bandit
 
