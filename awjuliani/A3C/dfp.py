@@ -1,3 +1,10 @@
+"""
+
+A3C ： 网络是actor-critic网络，有好几个worker agent，分别在环境中自行学习，把经历给全局网络，
+DFP ： 网络是Q network， 可能是dueling DQN，因为它在学习的时候是分别计算value和advantage，再结合成Q值。依然是有好几个worker，分别学习。
+"""
+
+
 # reinforcement learning with goals
 
 # an implementation of learning to act by predicting the future
