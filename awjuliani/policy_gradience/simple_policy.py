@@ -91,3 +91,17 @@ if np.argmax(ww) == np.argmax(-np.array(bandit_arms)):
 	print("...and it was right!")
 else:
 	print("...and it was wrong!")
+
+	
+"""
+策略梯度算法与Q Learning的不同之处在于，它是直接输出动作，或者动作的概率，不需要输出Q值。
+
+其它的基本流程不变：
+1.选择一个动作action
+2.得到奖励reward
+3.根据动作action和奖励reward更新网络
+
+最后奖励最大的就是我们要的结果。当然这个结果要在可行性范围内。
+
+当然这是比较有代表性的policy gradience
+"""
