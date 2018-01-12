@@ -28,3 +28,22 @@
 神经网络需要经历存储，然后方便后面随机采样用于训练网络。要有experience buffer。
 
 2.DQN 有两个网络，需要将Qevaluate net的参数更新到Qtarget net，这个更新过程需要好好理解。
+
+
+# 这里是一个很不错的用现成的环境做训练的例子。步骤很清晰
+# loading the cartpole environment
+import gym
+env = gym.make('CartPole-v0')
+# what happens if we try running the environment with random actions? how well do we do ? ( hint: not so well )
+env.reset()
+random_episodes = 0
+reward_sum = 0
+while random_episodes < 10:
+	env.render()
+	observation, reward, done, _ = env.step( np.random.randint(0, 2))
+	reward_sum += reward
+	if done:
+		random_episodes += 1
+		print( "reward for this episode was:", reward_sum )
+		reward_sum = 0
+		env.reset()
