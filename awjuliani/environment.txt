@@ -15,6 +15,27 @@ When the agent moves through a green or red square, it is randomly moved to a ne
 
 3.  n_armed bandit
 
+here we define our bandit. for this example we are using a four-armed bandit. the pullBandit function generates a random number
+from a normal distribution with a mean of 0. the lower the bandit number, the more likely a positive reward will be returned.
+we want our agent to learn to always choose the arm that will give that positive reward.
+
+在这里我们定义赌博机。对于这个例子我们用四臂赌博机。函数pullBandit（）从一个零均值的正态分布产生一个随机数字。赌博机的数字越小，就越可能得到一个
+正的奖励。我们当然希望我们的agent能够学会总是选择得到正奖励的arm。
+
+# list out our bandit arms
+# currently arm 4 (index #3) is set to most often provide a positive reward
+bandit_arms = [0.2, 0, -0.2, -2]
+num_arms = len(bandit_arms)
+def pullBandit(bandit):
+	# get a random number
+	result = np.random.randn(1)
+	if result > bandit:
+		# return a positive reward
+		return 1
+	else:
+		# return a negative reward
+		return -1
+
 4.  CartPole-v0
 
 5.  3D Doom
