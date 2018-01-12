@@ -198,4 +198,18 @@ print(episode_number, 'episodes completed')
 
 """
 advantages 在这里是什么呢？
+
+虽然网络结构不同，但是功能相同，其中的损失函数也会有所变化，视情况而定。
+
+像policy gradient，它的loss function就是不同的，它会涉及到对动作的评价指标的问题，会用似然函数类似的公式做loss。要格外注意。
+
+这里还有一个问题，就是这里提到好几个梯度的更新，是怎么回事？
+
+newGrads ：get the gradient for this episode, and save it in the gradBuffer
+这个应该是通常意义上的梯度，每一轮都有，只不过不用于更新，而是保存在buffer
+
+W1Grad、W2Grad： if we have completed enough episodes, then update the policy network with our gradients.
+达到足够多的轮数（batch_size轮）之后， 用这些梯度（W1Grad、W2Grad，取自gradbuffer）更新policy 网络。
+
+小技巧：平均奖励足够多的时候，我们再考虑做render，环境刷新。或者停止训练等等。。。
 """
