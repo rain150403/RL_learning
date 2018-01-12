@@ -36,6 +36,25 @@ def discount_rewards(r):
 1.经历回放 experience replay
 神经网络需要经历存储，然后方便后面随机采样用于训练网络。要有experience buffer。
 
+"""
+ExperienceBuffer is used to store a history of experiences that can be randomly drawn from when training the network.
+Additional helper functions are located in helper.py
+ExperienceBuffer用于存储历史经历，以便训练的时候随机选择。
+"""
+
+class ExperienceBuffer():
+    def __init__(self, buffer_size = 50000):
+        self.buffer = []
+        self.buffer_size = buffer_size
+    
+    def add(self,experience):
+        if len(list(self.buffer)) + len(list(experience)) >= self.buffer_size:
+            self.buffer[0:(len(list(experience))+len(list(self.buffer)))-self.buffer_size] = []
+        self.buffer.extend(experience)
+            
+    def sample(self,size):
+        return np.reshape(np.array(random.sample(self.buffer,size)),[size,3])
+
 2.DQN 有两个网络，需要将Qevaluate net的参数更新到Qtarget net，这个更新过程需要好好理解。
 
 
