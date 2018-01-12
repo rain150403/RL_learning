@@ -6,12 +6,11 @@ Tensorflow: 1.0
 gym: 0.8.0
 """
 
-import numpy as np
-import tensorflow as tf
+import numpy as np 
+import tensorflow as tf 
 
 np.random.seed(1)
 tf.set_random_seed(1)
-
 
 class DuelingDQN:
     def __init__(
@@ -59,6 +58,25 @@ class DuelingDQN:
         self.cost_his = []
 
     def _build_net(self):
+    	"""
+
+    	构建层函数：
+
+    	输入状态s（n_features维）， 经过一个隐含层得到l1， l1可以映射到一个值value， l1也要映射到advantage（n_actions维），再把value和advantage结合成Q值也就是out
+    	Q = V（s） + A（s， a）我怎么就没看到哪里输入了动作action。
+    	而且，value和advantage又不是同一维的， 难道是stack在一起的？
+
+    	如果是dueling方法，那么就把Q值分开为两部分； 如果不是，那就直接求Q值。
+
+
+    	利用build_layer函数去构建evaluate net（输入状态s，得到q_eval） ， target net（输入下一个状态s_， 输出q_next） 。
+
+    	输入Q_target目标Q值，再结合上面得到的q_eval，计算loss，再计算梯度，更新。
+
+    	这个 q_next是 做什么用的呢？用在learn学习过程中， 计算q_target， 也就是那个更新Q值的公式。
+    	q_target[batch_index, eval_act_index] = reward + self.gamma * np.max(q_next, axis=1)
+
+    	"""
         def build_layers(s, c_names, n_l1, w_initializer, b_initializer):
             with tf.variable_scope('l1'):
                 w1 = tf.get_variable('w1', [self.n_features, n_l1], initializer=w_initializer, collections=c_names)
@@ -110,6 +128,7 @@ class DuelingDQN:
             self.q_next = build_layers(self.s_, c_names, n_l1, w_initializer, b_initializer)
 
     def store_transition(self, s, a, r, s_):
+    	"""记忆保存， 与格式转换"""
         if not hasattr(self, 'memory_counter'):
             self.memory_counter = 0
         transition = np.hstack((s, [a, r], s_))
@@ -118,6 +137,7 @@ class DuelingDQN:
         self.memory_counter += 1
 
     def choose_action(self, observation):
+    	"""选择动作， 如果产生的随机值小于epsilon， 那就根据Q值选择，如果大于，那就随机选择。 """
         observation = observation[np.newaxis, :]
         if np.random.uniform() < self.epsilon:  # choosing action
             actions_value = self.sess.run(self.q_eval, feed_dict={self.s: observation})
@@ -130,9 +150,14 @@ class DuelingDQN:
         if self.learn_step_counter % self.replace_target_iter == 0:
             self.sess.run(self.replace_target_op)
             print('\ntarget_params_replaced\n')
+        """是否满足更新频率，满足就更新到target net。"""
+
+        """ 随机选择经历"""
 
         sample_index = np.random.choice(self.memory_size, size=self.batch_size)
         batch_memory = self.memory[sample_index, :]
+
+        """运算两个网络的前向计算"""
 
         q_next = self.sess.run(self.q_next, feed_dict={self.s_: batch_memory[:, -self.n_features:]}) # next observation
         q_eval = self.sess.run(self.q_eval, {self.s: batch_memory[:, :self.n_features]})
@@ -145,10 +170,12 @@ class DuelingDQN:
 
         q_target[batch_index, eval_act_index] = reward + self.gamma * np.max(q_next, axis=1)
 
+        """对梯度做更新"""
+
         _, self.cost = self.sess.run([self._train_op, self.loss],
                                      feed_dict={self.s: batch_memory[:, :self.n_features],
                                                 self.q_target: q_target})
-        self.cost_his.append(self.cost)
+        self.cost_his.append(self.cost) """对历史损失做一个记录"""
 
         self.epsilon = self.epsilon + self.epsilon_increment if self.epsilon < self.epsilon_max else self.epsilon_max
         self.learn_step_counter += 1
