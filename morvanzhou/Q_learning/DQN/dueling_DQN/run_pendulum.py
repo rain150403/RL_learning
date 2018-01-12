@@ -32,8 +32,11 @@ with tf.variable_scope('dueling'):
         e_greedy_increment=0.001, sess=sess, dueling=True, output_graph=True)
 
 sess.run(tf.global_variables_initializer())
-
-
+"""
+这里的train函数就只调用了learn函数。
+最后返回了loss， 和accumulated reward。
+这里有对动作的范围限制，也有对reward的归一化
+"""
 def train(RL):
     acc_r = [0]
     total_steps = 0
