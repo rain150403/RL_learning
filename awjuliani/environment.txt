@@ -38,6 +38,16 @@ def pullBandit(bandit):
 
 4.  CartPole-v0
 
+this function allows us to weigh the rewards our agent recieves. in the context of the cartpole task, we want actions that kept the 
+pole in the air a long time to have a large reward, and actions that contributed to the pole falling to have a decreased or negative
+reward. we do this by weighing the rewards from the end of the episode, with actions at the end being seen as negative, since they 
+likely contributed to the pole falling , and the episode ending. likewise, early actions are seen as more positive, since they weren't
+responsible for the pole falling.
+
+这个函数允许我们对agent得到的奖励做一个权衡。在cartpole任务的环境下，我们需要的动作是让这pole在空中停留的时间更长一些，以便得到更大的奖励，反之让它掉落的动作就会得到一个递减的或者负的奖励。
+我们通过权衡在每一轮的结尾得到的奖励来选择动作，如果一个动作很有可能让pole掉落，那最终就会被视为负的，这一轮结束。同样的，一个动作不会让pole掉落，那我们就会认为它是正的。
+
+
 5.  3D Doom
 
 6.  gridworld-pic
