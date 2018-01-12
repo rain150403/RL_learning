@@ -46,3 +46,6 @@ if __name__ == "__main__":
 
     env.after(0, update)
     env.mainloop()
+"""
+虽然有环境，这里还是引入了一个model，像memory replay buffer一样的，在训练的时候，用这个model再learn 10 more times
+"""
