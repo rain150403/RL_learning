@@ -276,17 +276,16 @@ for i in range(6):
 plt.tight_layout()  #图像外部边缘的调整可以使用plt.tight_layout()进行自动控制，此方法不能够很好的控制图像间的间隔。
 
 
-
-
-
-
-
-
-
-
 """
 策略梯度算法是不是就是引入了advantage？reward 有递减的设计discount
 
 本来是有环境的，在这里是说，可以用已经训练好的model，也可以继续训练model，当然还可以用policy network。
+
+# model network
+# here we implement a multi-layer neural network that predicts the next observation, reward, and done state from a current state and action.
+
+这里我们实现一个多层的神经网络，它预测下一个observation， reward， 并且根据当前的状态和动作得到新的状态。
+
+无非就是借助神经网络为真实环境建模。
 
 """
