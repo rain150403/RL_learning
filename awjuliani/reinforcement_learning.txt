@@ -38,6 +38,9 @@ def discount_rewards(r):
 2.DQN 有两个网络，需要将Qevaluate net的参数更新到Qtarget net，这个更新过程需要好好理解。
 
 
+梯度更新也可以有更新频率的，不一定非要每一步都更新。
+
+
 # 这里是一个很不错的用现成的环境做训练的例子。步骤很清晰
 # loading the cartpole environment
 import gym
