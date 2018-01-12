@@ -1,4 +1,9 @@
 """
+莫烦写的RL类里都会有这三个函数：
+def check_state_exist(self, state):
+def choose_action(self, observation):
+def learn(self, s, a, r, s_): # 对于Q-learning， 主要是更新Q值的那个公式
+
 This part of code is the Q learning brain, which is a brain of the agent.
 All decisions are made in here.
 View more on my tutorial page: https://morvanzhou.github.io/tutorials/
