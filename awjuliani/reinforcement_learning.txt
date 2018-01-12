@@ -42,6 +42,29 @@ def discount_rewards(r):
 梯度更新也可以有更新频率的，不一定非要每一步都更新。
 
 
+asynchronus advantage actor-critic(A3C)
+
+# copies one set of variables to another.
+# used to set worker network parameters to those of global network
+"""把一系列的变量从一个网络拷贝到另一个，也就是用来把worker网络的参数设置到global网络上。"""
+
+def update_target_graph(from_scope, to_scope):
+	from_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, from_scope)
+	to_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, to_scope)
+
+	op_holder = []
+	for from_var, to_var in zip(from_vars, to_vars):
+		op_holder.append(to_var.assign(from_var))
+	return op_holder
+
+
+网络和agent（worker）是不一样的，前者是学习策略，后者是学生，学习如何借助这个网络变得更聪明。
+
+像这里，有AC_network （actor-critic network）也就是演员评论家网络
+还有worker， worker agent也就是动作执行者。
+
+
+
 # 这里是一个很不错的用现成的环境做训练的例子。步骤很清晰
 # loading the cartpole environment
 import gym
