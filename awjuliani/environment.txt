@@ -35,6 +35,41 @@ def pullBandit(bandit):
 	else:
 		# return a negative reward
 		return -1
+		
+		
+here we define our contextual bandits. in this example, we are using three four-armed bandit. 
+what this means is that each bandit has four arms that canbe pulled. each bandit has different 
+success probabilities for each arm, and as such requires different actions to obtain the best result. 
+the pullBandit function generates a random number from a normal distribution with a mean of 0. the lower 
+the bandit number , the more likely a positive reward will be returned. we want our agent to learn to 
+always choose the bandit-arm that will most often give a positive reward, depending on the bandit presented.
+
+这里我们定义上下文赌博机。在这个例子中，我们用三个四臂赌博机。也就是说每一个赌博机，都有四个arm可以被推动。每个
+赌博机的每个arm都有不同的成功概率，因此需要不同的动作来获取最好的结果。这个函数从一个零均值正态分布产生一个随机数字。
+赌博机的号码越小，就越有可能得到正的奖励。我们希望我们的agent能够学着总是在这个环境中选择能够给出正的奖励的arm。
+
+class contextual_bandit():
+	def __init__(self):
+		self.state = 0
+		# list out our bandits. currently arms 4, 2, and 1 (respectively) are the most optimal.
+		self.bandits = np.array([[0.2, 0, -0.0, -5], [0.1, -5, 1, 0.25], [-5, 5, 5, 5]])
+		self.num_bandits = self.bandits.shape[0]
+		self.num_actions = self.bandits.shape[1]
+
+	def getBandit(self):
+		self.state = np.random.randint(0, len(self.bandits)) # returns a random state for each episode.
+		return self.state
+
+	def pullArm(self, action):
+		# get a random number
+		bandit = self.bandits[self.state, action]
+		result = np.random.randn(1)
+		if result > bandit:
+			# return a positive reward
+			return 1
+		else:
+			# return a negative reward.
+			return -1
 
 4.  CartPole-v0
 
