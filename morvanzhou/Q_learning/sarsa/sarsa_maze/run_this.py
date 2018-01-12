@@ -1,5 +1,7 @@
 """
 Sarsa is a online updating method for Reinforcement learning.
+sarsa是在线更新方法。q_learning是一个离线更新方法。sarsa在当前轨道更新。
+当惩罚靠近时，你会看到sarsa显得更加胆小，因为它关心所有的行为。而q_learning就会比较勇敢，因为它只关心有最大价值的动作。
 Unlike Q learning which is a offline updating method, Sarsa is updating while in the current trajectory.
 You will see the sarsa is more coward when punishment is close because it cares about all behaviours,
 while q learning is more brave because it only cares about maximum behaviour.
