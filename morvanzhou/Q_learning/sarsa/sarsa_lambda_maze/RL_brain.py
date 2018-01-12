@@ -2,6 +2,11 @@
 This part of code is the Q learning brain, which is a brain of the agent.
 All decisions are made in here.
 View more on my tutorial page: https://morvanzhou.github.io/tutorials/
+
+很好奇资格迹在这里到底是干嘛的？？？
+隐约想起来一些，lambda就是看看往后看多远的经历，因为太早的经历可能没有帮助了，也可能未来的经历看不了那么远
+
+对于sarsa-lambda，只要能明白“资格迹”这个概念就行了，剩下的和sarsa 和Q-learning都一样，过程就是基本的强化学习过程。
 """
 
 import numpy as np
