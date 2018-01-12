@@ -21,6 +21,7 @@
 
 输入网络的都是用来选择动作的，不要忘了，不管我们的网络多么的复杂，都是为了选择动作而生。
 
+(policy gradient里有涉及)
 def discount_rewards(r):
 	""" take 1D float array of rewards and compute discounted reward """
 	discounted_r = np.zeros_like(r)
