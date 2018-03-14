@@ -1,14 +1,19 @@
 有各式各样的环境形式， 但基本操作是相同的。所以， 要有一个基本的功能代码， 其它的就看各种实现形式了。
 
-basic.py                    game_engine.py                 game_general.py    
-game_keepdistance.py        game_keephitrate.py   
+basic.py                    game_engine.py
+game_general.py  （多次使用）
+game_maze.py（修改之后也能运行的一种游戏模式）
+
+game_keepdistance.py        game_keephitrate.py   
 game_maze_competition.py    game_maze_hiding_cheesing.py   game_maze_hiding.py    game_maze_keephitrate_cheesing.py    game_maze_keephitrate_multi_shooter.py   game_maze_keephitrate.py   
-game_maze.py  
 game_semicircular.py   
 game_smater_gun.py   
-__init__.py   
-maze_env.py                 maze.py                         maze_world.py
 
+
+
+maze_env.py                 maze.py                        maze_world.py
+
+__init__.py   (最最基本)
 
 /util/common.py :
 1. 而真正需要做的是设置游戏模式MODES
@@ -44,3 +49,14 @@ maze_env.py                 maze.py                         maze_world.py
 17. mode == 'maze-smarter-gun'                     env = GameSmartGun(**params)                               <---  (game_smater_gun.py)
 18. mode == 'maze-keep-hit-rate-multi-shooter'     env = GameMazeKeepHitRateMultiShooter(**params)            <---  (game_maze_keephitrate_multi_shooter.py)
 19. mode == 'maze-competition'                     env = GameMazeKeepHitRate(**params)    [ env = GameMazeCompetition(**params) (兔子模型) ]  <---  (game_maze_competition.py)
+
+
+
+__init__.py的作用有如下几点：
+  1. 相当于class中的def __init__(self):函数，用来初始化模块。
+  2. 把所在目录当作一个package处理
+  3. from-import 语句导入子包时需要用到它。 如果没有用到, 他们可以是空文件。
+       如引入package.module下的所有模块
+       from package.module import * 
+       这样的语句会导入哪些文件取决于操作系统的文件系统. 所以我们在__init__.py 中加入 __all__变量. 
+       该变量包含执行这样的语句时应该导入的模块的名字. 它搜索由一个模块名字符串列表组成.
