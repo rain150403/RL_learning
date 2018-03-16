@@ -123,7 +123,8 @@ class GameEngine(object):
                 gun_action = 4
             return gun_action    # 如果是预测， 那就根据wsad方向键确定动作， 并最后返回相应的动作所对应的数字。
 
-    def get_reward_terminal(self):
+    def get_reward_terminal(self):  # # 我知道，这个函数其实没有具体实现， 要在它的子类里面自己实现。所以这个代码才不能运行
+
         """
         Give the tuple (reward, terminal, other_info) to the agent    把元组给agent， 不知道为什么没有操作， 还要产生一个错误信息
         :return: the tuple
